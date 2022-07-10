@@ -1,0 +1,15 @@
+ .userAvatar {
+  object-fit: cover;
+  width: calc(3rem + 15px);
+  height: calc(3rem + 15px);
+  border-radius: 8px;
+  border: 2px solid var(--gray-800);
+  outline: 2px solid var(--green-500);
+}
+
+.userAvatarWithoutBorder{
+  object-fit:cover;
+  width:3rem;
+  height:3rem;
+  border-radius:3px;
+}
