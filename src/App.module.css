@@ -7,3 +7,15 @@
   gap:2rem;
   align-items:flex-start;
 }
+
+@media (max-width: 768px) {
+  html{
+    font-size: 87.5%;
+  }
+  .container{
+    grid-template-columns:1fr;
+  }
+  .commentContainer{
+    flex-direction: column !important;
+  }
+}
