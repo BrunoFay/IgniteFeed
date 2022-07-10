@@ -1,34 +1,54 @@
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
 import React from 'react'
 import Comment from './Comment';
 import styles from './Post.module.css';
 import UserAvatar from './UserAvatar';
 
-export default function Post() {
+interface PostProps {
+  author: {
+    name: string;
+    avatarUrl: string;
+    role: string
+  },
+  content: Array<{ type: string, content: string | string[] }>,
+  publisedAt: Date
+}
+export default function Post({ author, content, publisedAt }: PostProps) {
+  const dateFormatted = format(publisedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    locale: ptBR
+  })
+  const publishedDateRelativeToNow = formatDistanceToNow(publisedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <UserAvatar src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" />
+          <UserAvatar src={author.avatarUrl} />
           <div className={styles.authorInfos}>
-            <strong>Amanda Babanovic</strong>
-            <span>Ux Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
-        <time title='11 de Maio ás 08:13h' dateTime='2022-05-11 08:13:30'>
-          Públicado há 1h
+        <time title={dateFormatted} dateTime={publisedAt.toISOString()}>
+          {publishedDateRelativeToNow}
         </time>
       </header>
       <div className={styles.content}>
-        <p>Fala galeraa 👋</p>
-        <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
-        </p>
-        <p><a href=''>  jane.design/doctorcare  </a></p>
-        <p>
-          <a href=''>#novoprojeto </a>
-          <a href=''>#nlw</a>
-          <a href=''>#rocketseat</a>
-        </p>
+        {content.map(c => {
+          if (c.type === 'paragraph') {
+            return (<p>{c.content}</p>)
+          }
+          else if (c.type === 'hashtag') {
+            const hashtagContent = c.content as string[]
+            return (<p>{hashtagContent.map(c => { return (<a>{c}</a>) })}</p>)
+          }
+          else {
+            return (<p><a href='#'>{c.content}</a></p>)
+          }
+        })}
       </div>
       <div className={styles.commentForm}>
         <strong>

@@ -40,8 +40,8 @@ bottom:1.5rem
 .cardContainer footer a{
   width:100%;
   background:transparent;
-  color: var(--green-500);
-  border: 1px solid var(--green-500);
+  color: var(--brand-500);
+  border: 1px solid var(--brand-500);
   border-radius:8px;
   height:50px; 
   padding:0 1.5rem;
@@ -55,6 +55,6 @@ bottom:1.5rem
 }
 .cardContainer footer a:hover, .cardContainer footer a:focus{
   outline: none;
-  background:var(--green-500);
+  background:var(--brand-500);
   color: var(--white);
 }

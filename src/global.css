@@ -9,13 +9,13 @@
   --gray-700: #29292e;
   --gray-800: #202024;
   --gray-900: #121214;
-  --green-300: #00b37e;
-  --green-500: #00875f;
+  --brand-300: #fff200;
+  --brand-500:#ff9f1a;
   --red-500: #f75a68
 }
 :focus{
   outline: transparent;
-  box-shadow: 0 0 0 2px var(--green-300);
+  box-shadow: 0 0 0 2px var(--brand-300);
 }
 
 *{

@@ -2,6 +2,7 @@ import Header from "./components/Header"
 import styles from "./App.module.css"
 import UserCardAside from "./components/UserCardAside"
 import Post from "./components/Post"
+import { api } from "./mockApi"
 
 function App() {
 
@@ -11,7 +12,13 @@ function App() {
       <div className={styles.container}>
         <UserCardAside />
         <main>
-          <Post />
+          {api.map(post => (
+            <Post
+              author={post.author}
+              content={post.content}
+              publisedAt={post.publishedAt}
+            />
+          ))}
         </main>
       </div>
     </>

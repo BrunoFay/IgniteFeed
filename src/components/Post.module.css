@@ -18,7 +18,7 @@
 }
 .content a {
   font-weight: bold;
-  color: var(--green-500);
+  color: var(--brand-500);
   tesxt-decoration:none;
 }
 .content p  {
@@ -26,7 +26,7 @@ display:flex;
 gap:0.5rem;
 }
 .content a:hover {
-  color:var(--green-300);
+  color:var(--brand-300);
 }
 
 .post > header{
@@ -88,20 +88,20 @@ color: var(--gray-100);
   color:var(--gray-100); 
 }
 .commentForm textarea :focus{
-  outline: var(--green-500);
+  outline: var(--brand-500);
 }
 .commentForm button[type="submit"]{
   padding:1rem 1.5rem;
   margin-top:1rem;
   border-radius: 8px;
   border:0;
-  background:var(--green-500);
+  background:var(--brand-500);
   color:var(--white);
   font-weight:bold;
   cursor:pointer;
 }
 .commentForm button[type="submit"]:hover{
-  background:var(--green-300);
+  background:var(--brand-300);
 }
 .commentList{
   margin-top:2rem;
