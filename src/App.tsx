@@ -14,6 +14,7 @@ function App() {
         <main>
           {api.map(post => (
             <Post
+              key={post.id}
               author={post.author}
               content={post.content}
               publisedAt={post.publishedAt}
