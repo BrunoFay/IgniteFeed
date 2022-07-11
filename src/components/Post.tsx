@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
-import React, { FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import Comment from './Comment';
 import styles from './Post.module.css';
 import UserAvatar from './UserAvatar';
@@ -14,13 +14,16 @@ interface PostProps {
   content: Array<{ type: string, content: string | string[] }>,
   publisedAt: Date
 }
-interface IComment {
+export interface IComment {
   id?: number,
-  commentForm: string
+  commentForm: string,
+  avatarUrl?: string,
+  name?: string,
 }
 export default function Post({ author, content, publisedAt }: PostProps) {
   const [commentsList, setComments] = useState<IComment[]>([
-    { id: 1, commentForm: 'Muito bom Devon, parabéns!! 👏👏' }
+    { id: 1, commentForm: 'Muito bom Amanda, parabéns!! 👏👏' },
+    { id: 2, commentForm: 'Super Recomendo Golang!' },
   ])
   const [newComment, setNewComment] = useState<IComment>({ commentForm: '' })
   const dateFormatted = format(publisedAt, "d 'de' LLLL 'às' HH:mm'h'", {
@@ -30,19 +33,24 @@ export default function Post({ author, content, publisedAt }: PostProps) {
     locale: ptBR,
     addSuffix: true,
   })
-  function handleSubmitNewComment(e: FormEvent | any) {
-    console.log('cheguei')
+  const isNewCommentEmpty = !newComment.commentForm.length
+  function handleSubmitNewComment(e: FormEvent) {
     e.preventDefault();
-    setNewComment(e.target.value)
     setComments([...commentsList, newComment])
     setNewComment({ commentForm: '' })
   }
-  function handleChange(e: any) {
+  function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
     const value = e.target.value;
-    setNewComment({ id: commentsList.length + 1, commentForm: value })
+    const myComment: IComment = {
+      id: commentsList.length + 1,
+      commentForm: value,
+      avatarUrl:'https://avatars.githubusercontent.com/u/87674307?v=4',
+      name:'Bruno Fay'      
+    }
+    setNewComment(myComment)
   }
   function deleteComment(id: number) {
-    console.log('chege',id)
+    console.log('chege', id)
     setComments(commentsList.filter((c) => c.id !== id))
   }
   return (
@@ -94,6 +102,7 @@ export default function Post({ author, content, publisedAt }: PostProps) {
         <footer>
           <button
             onClick={handleSubmitNewComment}
+            disabled={isNewCommentEmpty}
             type="submit">
             Publicar
           </button>
@@ -103,10 +112,10 @@ export default function Post({ author, content, publisedAt }: PostProps) {
       <div className={styles.commentList}>
         {commentsList.map(comment => {
           return (
-          <Comment 
-          onDeleteComment={deleteComment}
-          key={comment.id!} 
-          comment={comment} />
+            <Comment
+              onDeleteComment={deleteComment}
+              key={comment.id!}
+              comment={comment} />
           )
         })}
       </div>
