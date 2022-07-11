@@ -4,6 +4,8 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import Comment from './Comment';
 import styles from './Post.module.css';
 import UserAvatar from './UserAvatar';
+import { v4 as uuidv4 } from 'uuid';
+
 
 interface PostProps {
   author: {
@@ -15,15 +17,15 @@ interface PostProps {
   publisedAt: Date
 }
 export interface IComment {
-  id?: number,
+  id?:string,
   commentForm: string,
   avatarUrl?: string,
   name?: string,
 }
 export default function Post({ author, content, publisedAt }: PostProps) {
   const [commentsList, setComments] = useState<IComment[]>([
-    { id: 1, commentForm: 'Muito bom Amanda, parabéns!! 👏👏' },
-    { id: 2, commentForm: 'Super Recomendo Golang!' },
+    { id:uuidv4(), commentForm: 'Muito bom Amanda, parabéns!! 👏👏' },
+    { id: uuidv4(), commentForm: 'Super Recomendo Golang!' },
   ])
   const [newComment, setNewComment] = useState<IComment>({ commentForm: '' })
   const dateFormatted = format(publisedAt, "d 'de' LLLL 'às' HH:mm'h'", {
@@ -42,15 +44,14 @@ export default function Post({ author, content, publisedAt }: PostProps) {
   function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
     const value = e.target.value;
     const myComment: IComment = {
-      id: commentsList.length + 1,
+      id:uuidv4(),
       commentForm: value,
       avatarUrl:'https://avatars.githubusercontent.com/u/87674307?v=4',
       name:'Bruno Fay'      
     }
     setNewComment(myComment)
   }
-  function deleteComment(id: number) {
-    console.log('chege', id)
+  function deleteComment(id: string) {
     setComments(commentsList.filter((c) => c.id !== id))
   }
   return (

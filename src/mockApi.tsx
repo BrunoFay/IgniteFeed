@@ -1,5 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const api = [{
-  id: '1',
+  id: uuidv4(),
   author: {
     avatarUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80",
     name: 'Amanda Babanovic',
@@ -30,7 +32,7 @@ export const api = [{
   publishedAt: new Date('2022-07-09 20:07:05')
 },
 {
-  id: '2',
+  id: uuidv4(),
   author: {
     avatarUrl: "https://images.unsplash.com/photo-1583196974626-9402e3774505?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
     name: 'James Curry',

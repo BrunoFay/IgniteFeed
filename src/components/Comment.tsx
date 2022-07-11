@@ -8,8 +8,8 @@ import UserAvatar from './UserAvatar'
 
 interface CommentProps {
   comment: IComment,
-  key: number,
-  onDeleteComment: (id: number) => void
+  key: string,
+  onDeleteComment: (id: string) => void
 }
 export default function Comment({ comment, onDeleteComment }: CommentProps) {
   const [likeCount, setLikeCount] = useState(0)
